@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- NeonOS M0 local manifest: sargo device trees + proprietary blobs,
+     all pinned to lineage-22.2. Copied to .repo/local_manifests/neon.xml. -->
+<manifest>
+  <!-- Device trees (from lineage.dependencies chain) -->
+  <project name="LineageOS/android_device_google_sargo" path="device/google/sargo" remote="github" revision="lineage-22.2" />
+  <project name="LineageOS/android_device_google_bonito" path="device/google/bonito" remote="github" revision="lineage-22.2" />
+  <project name="LineageOS/android_device_google_gs-common" path="device/google/gs-common" remote="github" revision="lineage-22.2" />
+  <project name="LineageOS/android_kernel_google_msm-4.9" path="kernel/google/msm-4.9" remote="github" revision="lineage-22.2" />
+  <project name="LineageOS/android_packages_apps_ElmyraService" path="packages/apps/ElmyraService" remote="github" revision="lineage-22.2" />
+  <!-- Proprietary vendor blobs (TheMuppets) -->
+  <project name="TheMuppets/proprietary_vendor_google_sargo" path="vendor/google/sargo" remote="github" revision="lineage-22.2" />
+  <project name="TheMuppets/proprietary_vendor_google_bonito" path="vendor/google/bonito" remote="github" revision="lineage-22.2" />
+</manifest>
