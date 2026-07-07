@@ -19,6 +19,8 @@
 
 ## 2. One-time setup
 
+> **Shortcut:** everything in §2–§3 is automated by **`scripts/setup-nobara.sh`**. Copy the whole `scripts/` folder to the Nobara machine and run `./setup-nobara.sh` (idempotent; interrupted syncs resume). Then build with `./build-sargo.sh` (§4 automated — picks a safe job count from RAM/cores). The manual steps below document what the script does.
+
 ### 2.1 Packages
 
 ```bash
