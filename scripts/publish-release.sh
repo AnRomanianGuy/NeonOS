@@ -36,17 +36,16 @@ command -v jq >/dev/null 2>&1 || { echo "jq not found (needed to update ota/sarg
 
 get_prop() { grep -m1 "^$1=" "$BUILD_PROP" | cut -d= -f2-; }
 
-# These three match exactly what the Updater app (Utils.isCompatible/canInstall,
-# see Constants.PROP_BUILD_DATE/PROP_BUILD_VERSION/PROP_RELEASE_TYPE) compares
-# against the device's own props at update-check time -- ro.build.date.utc is
-# the actual "is this newer" gate; ro.lineage.build.version stays "22.2" for
-# every NeonOS build on this branch (compareVersions() only requires >=, which
-# a constant value always satisfies) and isn't the real freshness signal.
+# These three match exactly what the Updater app (Utils.isCompatible/canInstall, see
+# Constants.PROP_BUILD_DATE/PROP_NEON_VERSION/PROP_RELEASE_TYPE) compares against the device's
+# own props at update-check time. ro.neon.version (NeonOS's own "0.1"-style version, not the
+# constant ro.lineage.build.version="22.2") backs both the version-gate comparison and the
+# real freshness signal, ro.build.date.utc.
 DATETIME="$(get_prop ro.build.date.utc)"
-VERSION="$(get_prop ro.lineage.build.version)"
+VERSION="$(get_prop ro.neon.version)"
 ROMTYPE="$(get_prop ro.lineage.releasetype)"
 [ -n "$DATETIME" ] && [ -n "$VERSION" ] && [ -n "$ROMTYPE" ] || {
-    echo "Could not read ro.build.date.utc / ro.lineage.build.version / ro.lineage.releasetype from $BUILD_PROP" >&2
+    echo "Could not read ro.build.date.utc / ro.neon.version / ro.lineage.releasetype from $BUILD_PROP" >&2
     exit 1
 }
 

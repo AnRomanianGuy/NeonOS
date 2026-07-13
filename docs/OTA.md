@@ -49,25 +49,33 @@ one static file per channel, since NeonOS only ships one device:
       "datetime": 1783944195,
       "filename": "neon_sargo-ota.zip",
       "id": "<sha256 of the zip>",
-      "romtype": "UNOFFICIAL",
+      "romtype": "RELEASE",
       "size": 1124006435,
       "url": "https://github.com/AnRomanianGuy/NeonOS/releases/download/...",
-      "version": "22.2"
+      "version": "0.1"
     }
   ]
 }
 ```
 
-**What actually gates "is this update newer" is `datetime` vs. the device's
-own `ro.build.date.utc`** — not `version`. `ro.lineage.build.version` stays
-`22.2` for every NeonOS build (the underlying `lineage-22.2` branch doesn't
-change per NeonOS release), and the Updater's own version check only requires
-the manifest's version to be `>=` the device's, which a constant value always
-satisfies. `romtype` must match the device's `ro.lineage.releasetype`
-(`UNOFFICIAL` unless a future build sets `RELEASE_TYPE`). Both of
-`publish-release.sh`'s `version`/`romtype` values are read straight out of
-the build's own `system/build.prop`, not hardcoded, so this stays correct if
-that ever changes.
+`version` and `romtype` intentionally do **not** use the upstream Updater's
+usual sources (`ro.lineage.build.version`, which stays a constant `22.2` for
+every NeonOS build on this branch and would be a meaningless/wrong-looking
+NeonOS version number): `version` is NeonOS's own `ro.neon.version`
+(`"0.1"`), and both the Updater's compatibility check
+(`Utils.isCompatible`/`canInstall`, see `Constants.PROP_NEON_VERSION`) and
+`publish-release.sh` were switched to match — the manifest's `version` and
+the device's `ro.neon.version` are compared directly, so bumping NeonOS's
+own version (e.g. to `"0.2"`) is what actually needs to happen for a release
+to be considered a real version upgrade; `datetime` remains the deciding
+"is this newer" gate day-to-day between builds that share a version number.
+`romtype` must match the device's `ro.lineage.releasetype` — `build-sargo.sh`
+sets `RELEASE_TYPE=RELEASE` for `neon_*` targets (the build system has no
+literal "OFFICIAL" value; `RELEASE` is LineageOS's own term for what NeonOS's
+release builds are), so this now reads `RELEASE` rather than the default
+`UNOFFICIAL`. All three of `publish-release.sh`'s `datetime`/`version`/`romtype`
+values are read straight out of the build's own `system/build.prop`, not
+hardcoded, so this stays correct if either of these ever changes again.
 
 ## 4. Publishing a new build
 

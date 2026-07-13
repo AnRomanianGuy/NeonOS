@@ -36,7 +36,18 @@ lunch "$TARGET"
 # upstream (avoids patching vendor/lineage directly) — re-derive it here the
 # same way check_product() does, just for our own prefix.
 case "$TARGET" in
-  neon_*) export LINEAGE_BUILD="$(echo "$TARGET" | sed -E 's/^neon_([^-]+)-.*/\1/')" ;;
+  neon_*)
+    export LINEAGE_BUILD="$(echo "$TARGET" | sed -E 's/^neon_([^-]+)-.*/\1/')"
+    # ro.lineage.releasetype (compared by the Updater app, see
+    # packages/apps/Updater's Constants.PROP_RELEASE_TYPE) defaults to
+    # UNOFFICIAL unless RELEASE_TYPE is one of RELEASE/NIGHTLY/SNAPSHOT/
+    # EXPERIMENTAL (vendor/lineage/config/version.mk) — there's no literal
+    # "OFFICIAL" value the build system recognizes; RELEASE is LineageOS's
+    # own term for what NeonOS's own release builds are. Left unset for
+    # lineage_* baseline-comparison builds, which should report their real
+    # (unofficial) status.
+    export RELEASE_TYPE=RELEASE
+    ;;
 esac
 
 # jobs = min(nproc, RAM/2 GB): leaves headroom for metalava/lld link steps
