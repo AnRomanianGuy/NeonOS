@@ -86,7 +86,24 @@ repo sync -c -j8 --no-clone-bundle --no-tags --retry-fetches=3
 ```bash
 cd ~/android/lineage
 source build/envsetup.sh
-breakfast sargo          # sets up the lineage_sargo-userdebug target
+source vendor/lineage/vars/aosp_target_release   # sets $aosp_target_release, e.g. "bp1a"
+lunch neon_sargo-${aosp_target_release}-userdebug   # NeonOS target. breakfast sargo
+                              # always resolves to lineage_sargo regardless of
+                              # AndroidProducts.mk, and this tree needs the
+                              # 3-part <product>-<release>-<variant> lunch form —
+                              # so an explicit lunch like this is required. Swap
+                              # in lineage_sargo-${aosp_target_release}-userdebug
+                              # for an A/B regression build against the pristine
+                              # baseline.
+export LINEAGE_BUILD=sargo    # REQUIRED for any neon_* target. lunch's
+                              # check_product() only auto-sets this (which
+                              # gates pulling in vendor/lineage's board config —
+                              # kernel-header Soong vars, bootanimation/charger
+                              # config) for products named "lineage_<device>".
+                              # neon_sargo doesn't match, so it silently stays
+                              # unset and the build fails during Soong
+                              # bootstrap unless you export it yourself. Not
+                              # needed when building a lineage_sargo-* target.
 m bacon -jN              # N = min(nproc, RAM_GB / 2); e.g. 16 GB RAM → -j8
 ```
 
@@ -115,7 +132,10 @@ Full verified procedure (prerequisites, bootloader unlock, recovery, sideload) i
 ```bash
 cd ~/android/lineage
 repo sync -c -j8 --no-clone-bundle --no-tags   # pull upstream updates
-source build/envsetup.sh && breakfast sargo
+source build/envsetup.sh
+source vendor/lineage/vars/aosp_target_release
+lunch neon_sargo-${aosp_target_release}-userdebug
+export LINEAGE_BUILD=sargo   # required for neon_* targets — see §4
 m bacon -jN
 ```
 

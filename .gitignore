@@ -1,0 +1,15 @@
+# This repo holds docs/scripts/releases only — the AOSP/LineageOS source tree
+# lives on this same drive (android/lineage, symlinked from ~/android/lineage)
+# for disk-space reasons, but must never be tracked here. It contains, among
+# other things, NeonOS's private signing keys
+# (android/lineage/vendor/lineage-priv/keys/) — these must never be committed
+# or pushed anywhere, per explicit Product Owner instruction (2026-07-11).
+android/
+
+# Build logs and the build-host swapfile — local machine state, not project docs.
+*.log
+swapfile
+
+# Claude Code's own local tool config/settings — machine-local, not project source,
+# and not meant to be public on the GitHub repo.
+.claude/
