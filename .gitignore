@@ -13,3 +13,11 @@ swapfile
 # Claude Code's own local tool config/settings — machine-local, not project source,
 # and not meant to be public on the GitHub repo.
 .claude/
+
+# Internal AI-collaboration process docs (agent instructions, session-by-session build
+# narration, product roadmap) -- kept local-only per explicit Product Owner instruction
+# (2026-07-13): the public repo's surface is code, scripts, docs/BUILDING.md, docs/OTA.md,
+# and the OTA manifests only.
+CLAUDE.md
+DEVELOPMENT_PLAN.md
+NEON_PROJECT.md
