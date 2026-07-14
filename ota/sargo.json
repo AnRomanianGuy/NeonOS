@@ -1,6 +1,15 @@
 {
   "response": [
     {
+      "datetime": 1784057302,
+      "filename": "neon_sargo-ota.zip",
+      "id": "3552675fc612de1bde1668a40467d94ef1fb007952bb42b2cdf4fa51c1ffbe2a",
+      "romtype": "RELEASE",
+      "size": 1127520896,
+      "url": "https://github.com/AnRomanianGuy/NeonOS/releases/download/sargo-beta-1784057302/neon_sargo-ota.zip",
+      "version": "0.1"
+    },
+    {
       "datetime": 1784055386,
       "filename": "neon_sargo-ota.zip",
       "id": "12116c2f9dcf6ee77af9a8fd3c000377a5068799617e8ae7ecd22dff1f3a15eb",
