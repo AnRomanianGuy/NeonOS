@@ -1,6 +1,15 @@
 {
   "response": [
     {
+      "datetime": 1784383394,
+      "filename": "lineage-22.2-20260718-RELEASE-sargo.zip",
+      "id": "dca81585904b18bda7f3b3dfe99bbf015b65788f0cc517abf50f9651f92ffac2",
+      "romtype": "RELEASE",
+      "size": 1127575517,
+      "url": "https://github.com/AnRomanianGuy/NeonOS/releases/download/sargo-beta-1784383394/lineage-22.2-20260718-RELEASE-sargo.zip",
+      "version": "0.1"
+    },
+    {
       "datetime": 1784118114,
       "filename": "lineage-22.2-20260715-RELEASE-sargo.zip",
       "id": "14cb07e53e7d8348198632adc9a1ef41b2486d5cbb19afaca9134356e6bbbb10",
