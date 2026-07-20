@@ -1,6 +1,15 @@
 {
   "response": [
     {
+      "datetime": 1784539884,
+      "filename": "NeonOS-20260720-sargo-beta-ota-update.zip",
+      "id": "5992873a0efb3775e43e2bbf361fa2329dfe5d4a49a64b6b20fe4b882e65537c",
+      "romtype": "RELEASE",
+      "size": 1127576932,
+      "url": "https://github.com/AnRomanianGuy/NeonOS/releases/download/sargo-beta-1784539884/NeonOS-20260720-sargo-beta-ota-update.zip",
+      "version": "0.1"
+    },
+    {
       "datetime": 1784387891,
       "filename": "lineage-22.2-20260718-RELEASE-sargo.zip",
       "id": "63623fbbe5f9f991a22199133ea2e5402925f8c66cb847288f4cce0d9ab1f979",
